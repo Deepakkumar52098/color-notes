@@ -39,6 +39,7 @@ const App = () => {
 
   const getNewDate = () => formatDate(new Date());
 
+  //TO add a new note to the existing notes
   const addNote = (text) => {
     const date = getNewDate();
     const newNote = {
