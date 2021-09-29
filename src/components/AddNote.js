@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const AddNote = ({ handleAddNote }) => {
     const [newNote, setNewNote] = useState('');
     const maxCharCount = 200;
 
+    //To update the character count on typing any text 
     const handleOnChange = (event) => {
         const value = event.target.value;
         if (maxCharCount - value.length >= 0) {
@@ -11,6 +12,7 @@ const AddNote = ({ handleAddNote }) => {
         }
     }
 
+    //To handle onClick event on clicking save button
     const handleSaveClick = () => {
         if (newNote.trim().length > 0) {
             newNote && handleAddNote(newNote);
@@ -36,4 +38,5 @@ const AddNote = ({ handleAddNote }) => {
     );
 }
 
+//To render the add feature
 export default AddNote;

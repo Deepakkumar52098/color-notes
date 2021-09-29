@@ -11,4 +11,5 @@ const Search = ({ handleSearchNote }) => {
     );
 };
 
+//To render the search feature
 export default Search;
