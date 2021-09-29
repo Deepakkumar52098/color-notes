@@ -1,4 +1,5 @@
 import { MdDeleteForever } from 'react-icons/md'
+
 const Note = ({ id, text, date, handleDeleteNote, editMode }) => {
     return (
         <div className={`${editMode ? "edit-note" : "note"}`}>
@@ -14,4 +15,5 @@ const Note = ({ id, text, date, handleDeleteNote, editMode }) => {
     )
 }
 
+//To render the existing notes
 export default Note;
