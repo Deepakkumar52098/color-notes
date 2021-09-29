@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid'
 import NotesList from "./components/NotesList";
 import Search from "./components/Search";
@@ -6,32 +6,22 @@ import Header from "./components/Header";
 import React from 'react';
 
 const App = () => {
-  const [notes, setNotes] = useState([
-    {
-      id: nanoid(),
-      text: 'My first Note!',
-      date: '29/09/2021'
-    },
-    {
-      id: nanoid(),
-      text: 'My second Note!',
-      date: '30/09/2021'
-    },
-    {
-      id: nanoid(),
-      text: 'My third Note!',
-      date: '01/10/2021'
-    },
-    {
-      id: nanoid(),
-      text: 'My fourth Note!',
-      date: '02/10/2021'
-    }
-  ]);
+  const [notes, setNotes] = useState([]);
 
   const [searchText, setSearchText] = useState('');
 
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedNotes = JSON.parse(localStorage.getItem('color-note-app-data'));
+    if (savedNotes) {
+      setNotes(savedNotes);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('color-note-app-data', JSON.stringify(notes));
+  }, [notes]);
 
   const formatDate = (date, prefix = "") => {
     return typeof date == "object" ? prefix + date.toLocaleDateString() : "";
@@ -39,7 +29,7 @@ const App = () => {
 
   const getNewDate = () => formatDate(new Date());
 
-  //TO add a new note to the existing notes
+  //To add a new note to the existing notes
   const addNote = (text) => {
     const date = getNewDate();
     const newNote = {
