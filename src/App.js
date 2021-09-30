@@ -11,6 +11,8 @@ const App = () => {
   const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editText, setEditText] = useState('');
 
   //To set the state of notes from the localStorage
   useEffect(() => {
@@ -49,6 +51,16 @@ const App = () => {
     setNotes(newNotes);
   }
 
+  //
+  const editNote = (id) => {
+    const noteToBeEdited = notes.filter((note) => note.id === id);
+    deleteNote(id);
+    if (noteToBeEdited.length) {
+      setEditText(noteToBeEdited[0].text);
+      setEditMode(true);
+    }
+  }
+
   return (
     <div className={`${darkMode && "dark-mode"}`}>
       <div className="container">
@@ -62,6 +74,10 @@ const App = () => {
             note.text.toLowerCase().includes(searchText.toLowerCase()))}
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
+          handleEditNote={editNote}
+          editMode={editMode}
+          handleEditMode={setEditMode}
+          editText={editText}
         />
       </div>
     </div>

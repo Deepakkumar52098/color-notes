@@ -1,15 +1,22 @@
-import { MdDeleteForever } from 'react-icons/md'
+import { MdDeleteForever, MdEdit } from 'react-icons/md'
 
-const Note = ({ id, text, date, handleDeleteNote, editMode }) => {
+const Note = ({ id, text, date, handleDeleteNote, handleEditNote }) => {
     return (
-        <div className={`${editMode ? "edit-note" : "note"}`}>
+        <div className="note">
             <span>{text}</span>
             <div className="note-footer">
                 <small>{date}</small>
-                <MdDeleteForever
-                    className="delete-icon"
-                    size="1.3em"
-                    onClick={() => handleDeleteNote(id)} />
+                <div>
+                    <MdEdit
+                        className="delete-icon"
+                        size="1.3em"
+                        onClick={() => handleEditNote(id)}
+                    />
+                    <MdDeleteForever
+                        className="delete-icon"
+                        size="1.3em"
+                        onClick={() => handleDeleteNote(id)} />
+                </div>
             </div>
         </div>
     )

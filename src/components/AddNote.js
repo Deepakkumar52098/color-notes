@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AddNote = ({ handleAddNote }) => {
     const [newNote, setNewNote] = useState('');
     const maxCharCount = 200;
+    const [charCount, setCharCount] = useState(maxCharCount);
+    useEffect(() => {
+        setCharCount(maxCharCount - newNote.length);
+    }, [newNote]);
 
     //To update the character count on typing any text 
     const handleOnChange = (event) => {
@@ -23,6 +27,7 @@ const AddNote = ({ handleAddNote }) => {
     return (
         <div className="note addNote">
             <textarea
+                className="add-textArea"
                 row="20"
                 cols="10"
                 placeholder="Add your notes here..."
@@ -30,7 +35,7 @@ const AddNote = ({ handleAddNote }) => {
                 onChange={handleOnChange}>
             </textarea>
             <div className="note-footer">
-                <small>Character Count: {maxCharCount - newNote.length}</small>
+                <small>Character Count: {charCount}</small>
                 <button className="save" onClick={handleSaveClick}>Save</button>
             </div>
 
